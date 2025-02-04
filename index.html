@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <style>
+        body {
+            background-color: #FEA8C5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: #d46a85;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .gif-container {
+            margin: 20px 0;
+        }
+        .gif-container img {
+            width: 150px;
+            height: auto;
+        }
+        .btn {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        .yes-btn {
+            background-color: green;
+            color: white;
+            transition: font-size 0.3s ease;
+        }
+        .no-btn {
+            background-color: orangered;
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+        .full-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #F1BFF6;
+        }
+        .full-screen img {
+            width: 50%;
+            height: auto;
+        }
+        .expanded-yes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            font-size: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my Valentine?</h1>
+    <div class="gif-container">
+        <img src="valentine.gif" alt="Happy Bear">
+    </div>
+    <button class="btn yes-btn">Yes</button>
+    <button class="btn no-btn">No</button>
+    <script>
+        const yesButton = document.querySelector('.yes-btn');
+        const noButton = document.querySelector('.no-btn');
+        const question = document.querySelector('h1');
+        const gifContainer = document.querySelector('.gif-container');
+        let noClickCount = 0;
+        const noTexts = [
+            "Are you really sure?",
+            "Think about it again...",
+            "You wouldn't break my heart, right?",
+            "Just one more chance!",
+            "What if I say I have chocolate?",
+            "I'm gonna cry...",
+            "Okay, now I'm actually crying... 😢"
+        ];
+        noButton.addEventListener('click', () => {
+            if (noClickCount < noTexts.length) {
+                noButton.textContent = noTexts[noClickCount];
+                yesButton.style.fontSize = `${1.5 + noClickCount * 5}rem`;
+                noClickCount++;
+            } else {
+                yesButton.classList.add('expanded-yes');
+                yesButton.textContent = "YES";
+                question.classList.add('hidden');
+                gifContainer.classList.add('hidden');
+                noButton.classList.add('hidden');
+            }
+        });
+        yesButton.addEventListener('click', () => {
+            document.body.innerHTML = '<div class="full-screen"><img src="dog.gif" alt="Happy Dog"></div>';
+        });
+    </script>
+</body>
+</html>
